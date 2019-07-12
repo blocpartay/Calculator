@@ -1,3 +1,4 @@
+let calculationArray = [];
 
 function add (num1, num2) {
     return num1 + num2;
@@ -39,17 +40,40 @@ function numberPress(num) {
     //display the number on the screen 
 }
 
-function updateDisplay(num) {
-    document.getElementById('screen').innerHTML = num;
+function updateDisplay(char) {
+    document.getElementById('screen').innerHTML = char;
 }
 
 const numberButtons = Array.from(document.querySelectorAll('.numberButton'));
 numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
+        if (currentScreen == '+') {
+            document.getElementById('screen').innerHTML = '';
+        }
         document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
     })
 })
+
+const operatorButtons = Array.from(document.querySelectorAll('.operatorButton'));
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        currentScreen = document.getElementById('screen').innerHTML;
+        calculationArray.push(currentScreen);
+        document.getElementById('screen').innerHTML = button.innerHTML;
+        calculationArray.push(button.innerHTML);
+    })
+})
+
+const equalsButton = document.getElementById('equals');
+equalsButton.addEventListener('click', (e) => {
+    currentScreen = document.getElementById('screen').innerHTML;
+    calculationArray.push(currentScreen);
+    //document.getElementById('screen').innerHTML = button.innerHTML;
+    //calculationArray.push(button.innerHTML);
+    console.log(calculationArray);
+})
+
 //These could be in an array, i.e. [0] is num1, [1] is operator, [2] is num2
 //when you press a number it should check whether anything is stored in the operator position [1]
 //if not, store that value in [0] and replace any existing total, because it's deemed to be a new number.
