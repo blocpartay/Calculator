@@ -35,11 +35,6 @@ function operate (operator,num2,num1) {
     
 }
 
-function numberPress(num) {  
-    //check if it's the number preceding the operator.
-    //display the number on the screen 
-}
-
 function updateDisplay(char) {
     document.getElementById('screen').innerHTML = char;
 }
@@ -48,7 +43,7 @@ const numberButtons = Array.from(document.querySelectorAll('.numberButton'));
 numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
-        if (currentScreen == '+') {
+        if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
         }
         else {
