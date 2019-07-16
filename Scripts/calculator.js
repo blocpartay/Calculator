@@ -1,38 +1,31 @@
 let calculationArray = [];
 
 function add (num1, num2) {
-    return num1 + num2;
+    return (parseInt(num1, 10) + parseInt(num2, 10));
 }
 function subtract (num1, num2) {
-    return num1 - num2;
+    return (parseInt(num1, 10) - parseInt(num2, 10));
 }
 function multiply (num1, num2) {
-    return num1 * num2;
+    return (parseInt(num1, 10) * parseInt(num2, 10));
 }
 function divide (num1, num2) {
-    return num1 / num2;
+    return (parseInt(num1, 10) / parseInt(num2, 10));
 }
 
-let display = 10;
-
 function operate (operator,num2,num1) {
-    if (num1 == null) {
-        num1 = display;
-    }
-    console.log(display);
     if (operator == '+') {
         return add(num1,num2);
     }
     if (operator == '-') {
         return subtract(num1,num2);
     }
-    if (operator == '*') {
+    if (operator == 'x') {
         return multiply(num1,num2);
     }
     if (operator == '/') {
         return divide(num1,num2);
     }
-    
 }
 
 function updateDisplay(char) {
@@ -66,9 +59,7 @@ const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
     currentScreen = document.getElementById('screen').innerHTML;
     calculationArray.push(currentScreen);
-    //document.getElementById('screen').innerHTML = button.innerHTML;
-    //calculationArray.push(button.innerHTML);
-    console.log(calculationArray);
+    document.getElementById('screen').innerHTML = operate(calculationArray[1],calculationArray[2],calculationArray[0]);
 })
 
 //These could be in an array, i.e. [0] is num1, [1] is operator, [2] is num2
