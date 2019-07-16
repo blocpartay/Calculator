@@ -59,14 +59,9 @@ const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
     currentScreen = document.getElementById('screen').innerHTML;
     calculationArray.push(currentScreen);
-    document.getElementById('screen').innerHTML = operate(calculationArray[1],calculationArray[2],calculationArray[0]);
+    document.getElementById('screen').innerHTML = operate(calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1],calculationArray[calculationArray.length - 3]);
 })
 
-//These could be in an array, i.e. [0] is num1, [1] is operator, [2] is num2
-//when you press a number it should check whether anything is stored in the operator position [1]
-//if not, store that value in [0] and replace any existing total, because it's deemed to be a new number.
-//if so, store it in [2]. This could be a function number press to do this.
-//when you press the operator, this should store the operator in [1]
 //pressing = operates them, produces a result and puts that result in [0], and removes [1] and [2]
 //if the user presses an operator without typing num1, it uses the previous total in [0]
 //the approach above allows the user to do long sums, i.e. 2+2=4*3 
