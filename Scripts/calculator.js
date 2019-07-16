@@ -49,9 +49,11 @@ numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
         if (currentScreen == '+') {
-            document.getElementById('screen').innerHTML = '';
+            document.getElementById('screen').innerHTML = button.innerHTML;
         }
-        document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
+        else {
+            document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
+        }
     })
 })
 
