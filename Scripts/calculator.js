@@ -1,4 +1,5 @@
 let calculationArray = [];
+let tempCalculationTotal;
 
 function add (num1, num2) {
     return (parseInt(num1, 10) + parseInt(num2, 10));
@@ -36,14 +37,9 @@ const numberButtons = Array.from(document.querySelectorAll('.numberButton'));
 numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
-        calculationArray.push(button.innerHTML);
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
-            //console.log(calculationArray);
-            //calculationArray.push(operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]));
-            //console.log(calculationArray);
-            //store the above calculation array push in a temporary variable. in the equals section, lookup the calculation array lenght, if it's more than 2 you know there have been extra multiplications, so use the variable
-            //as part of the calculation.
+            tempCalculationTotal = operate(calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1],button.innerHTML);
         }
         else {
             document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
@@ -55,6 +51,7 @@ const operatorButtons = Array.from(document.querySelectorAll('.operatorButton'))
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
+        calculationArray.push(currentScreen);
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             alert('Please enter a number');
         }
@@ -67,7 +64,19 @@ operatorButtons.forEach((button) => {
 
 const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
-    document.getElementById('screen').innerHTML = operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]);
+    currentScreen = document.getElementById('screen').innerHTML;
+    calculationArray.push(currentScreen);
+
+    if (calculationArray.length >3) {
+        console.log(calculationArray);
+        console.log(tempCalculationTotal);
+        console.log(calculationArray[calculationArray.length - 2]);
+        console.log(calculationArray[calculationArray.length - 1]);
+        document.getElementById('screen').innerHTML = operate(tempCalculationTotal,calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]);   
+    }
+    else {
+        document.getElementById('screen').innerHTML = operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]);
+    }
 })
 
 const resetButton = document.getElementById('reset');
