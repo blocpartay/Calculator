@@ -36,12 +36,14 @@ const numberButtons = Array.from(document.querySelectorAll('.numberButton'));
 numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
+        calculationArray.push(button.innerHTML);
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
-            console.log(calculationArray);
-            //calculationArray.push(operate(calculationArray[calculationArray.length - 2],currentScreen,button.innerHTML));
             //console.log(calculationArray);
-            /*take the number just entered and 'operate' using the previous two. Basically just do the calculation, but dont display it on the screen, place it on the end of the calculation array?*/
+            //calculationArray.push(operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]));
+            //console.log(calculationArray);
+            //store the above calculation array push in a temporary variable. in the equals section, lookup the calculation array lenght, if it's more than 2 you know there have been extra multiplications, so use the variable
+            //as part of the calculation.
         }
         else {
             document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
@@ -53,16 +55,18 @@ const operatorButtons = Array.from(document.querySelectorAll('.operatorButton'))
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
-        calculationArray.push(currentScreen);
+        if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+            alert('Please enter a number');
+        }
+        else {
         document.getElementById('screen').innerHTML = button.innerHTML;
         calculationArray.push(button.innerHTML);
+        }
     })
 })
 
 const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
-    currentScreen = document.getElementById('screen').innerHTML;
-    calculationArray.push(currentScreen);
     document.getElementById('screen').innerHTML = operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]);
 })
 
