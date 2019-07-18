@@ -38,7 +38,12 @@ numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
         
-        if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+        if ((currentScreen == "/") && (button.innerHTML == 0)) {
+            alert('Ok clever cloggs, diving by zero is a bad idea');
+            calcArray = [];
+            document.getElementById('screen').innerHTML = "";
+        }
+        else if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
 
             return (calcArray.length < 3)
