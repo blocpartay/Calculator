@@ -40,12 +40,10 @@ numberButtons.forEach((button) => {
         
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
-            if (calcArray.length < 3) {
-                runningTotal = operate(calcArray[0],calcArray[1],button.innerHTML);
-            }
-            else {
-                runningTotal = operate(runningTotal,calcArray[calcArray.length - 1],button.innerHTML);
-            }    
+
+            return (calcArray.length < 3)
+               ? runningTotal = operate(calcArray[0],calcArray[1],button.innerHTML)
+               : runningTotal = operate(runningTotal,calcArray[calcArray.length - 1],button.innerHTML);   
         }
         else {
             document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
@@ -58,19 +56,30 @@ operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
         currentScreen = document.getElementById('screen').innerHTML;
         calcArray.push(currentScreen);
+
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             alert('Please enter a number');
         }
         else {
-        document.getElementById('screen').innerHTML = button.innerHTML;
-        calcArray.push(button.innerHTML);
+            document.getElementById('screen').innerHTML = button.innerHTML;
+            calcArray.push(button.innerHTML);
         }
     })
 })
 
 const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
-    document.getElementById('screen').innerHTML = runningTotal;
+    currentScreen = document.getElementById('screen').innerHTML;
+    if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+        alert('You need to enter another number');
+    }
+    else if (calcArray.length < 2) {
+        alert('You cant perform a calculation like this');
+    }
+    else {
+        document.getElementById('screen').innerHTML = runningTotal;
+    }
+    
 })
 
 const resetButton = document.getElementById('reset');
