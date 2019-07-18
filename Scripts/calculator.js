@@ -36,14 +36,14 @@ function updateDisplay(char) {
 const numberButtons = Array.from(document.querySelectorAll('.numberButton'));
 numberButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
-        currentScreen = document.getElementById('screen').innerHTML;
+        screen = document.getElementById('screen').innerHTML;
         
-        if ((currentScreen == "/") && (button.innerHTML == 0)) {
+        if ((screen == "/") && (button.innerHTML == 0)) {
             alert('Ok clever cloggs, diving by zero is a bad idea');
             calcArray = [];
             document.getElementById('screen').innerHTML = "";
         }
-        else if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+        else if (screen == '+' || screen == '-' || screen == 'x' || screen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
 
             return (calcArray.length < 3)
@@ -51,7 +51,7 @@ numberButtons.forEach((button) => {
                : runningTotal = operate(runningTotal,calcArray[calcArray.length - 1],button.innerHTML);   
         }
         else {
-            document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
+            document.getElementById('screen').innerHTML = (screen + '' + button.innerHTML);
         }
     })
 })
@@ -59,10 +59,10 @@ numberButtons.forEach((button) => {
 const operatorButtons = Array.from(document.querySelectorAll('.operatorButton'));
 operatorButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
-        currentScreen = document.getElementById('screen').innerHTML;
-        calcArray.push(currentScreen);
+        screen = document.getElementById('screen').innerHTML;
+        calcArray.push(screen);
 
-        if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+        if (screen == '+' || screen == '-' || screen == 'x' || screen == '/') {
             alert('Please enter a number');
         }
         else {
@@ -74,8 +74,8 @@ operatorButtons.forEach((button) => {
 
 const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
-    currentScreen = document.getElementById('screen').innerHTML;
-    if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
+    screen = document.getElementById('screen').innerHTML;
+    if (screen == '+' || screen == '-' || screen == 'x' || screen == '/') {
         alert('You need to enter another number');
     }
     else if (calcArray.length < 2) {
