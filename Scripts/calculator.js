@@ -1,5 +1,5 @@
 let calculationArray = [];
-let tempCalculationTotal;
+let tempCalculationTotal = 0;
 
 function add (num1, num2) {
     return (parseInt(num1, 10) + parseInt(num2, 10));
@@ -39,7 +39,12 @@ numberButtons.forEach((button) => {
         currentScreen = document.getElementById('screen').innerHTML;
         if (currentScreen == '+' || currentScreen == '-' || currentScreen == 'x' || currentScreen == '/') {
             document.getElementById('screen').innerHTML = button.innerHTML;
-            tempCalculationTotal = operate(calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1],button.innerHTML);
+            if (calculationArray.length < 3) {
+                tempCalculationTotal = operate(calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1],button.innerHTML);
+            }
+            else {
+                tempCalculationTotal = operate(tempCalculationTotal,calculationArray[calculationArray.length - 1],button.innerHTML);
+            }    
         }
         else {
             document.getElementById('screen').innerHTML = (currentScreen + '' + button.innerHTML);
@@ -64,6 +69,8 @@ operatorButtons.forEach((button) => {
 
 const equalsButton = document.getElementById('equals');
 equalsButton.addEventListener('click', (e) => {
+    document.getElementById('screen').innerHTML = tempCalculationTotal;
+    /*
     currentScreen = document.getElementById('screen').innerHTML;
     calculationArray.push(currentScreen);
 
@@ -77,6 +84,7 @@ equalsButton.addEventListener('click', (e) => {
     else {
         document.getElementById('screen').innerHTML = operate(calculationArray[calculationArray.length - 3],calculationArray[calculationArray.length - 2],calculationArray[calculationArray.length - 1]);
     }
+    */
 })
 
 const resetButton = document.getElementById('reset');
